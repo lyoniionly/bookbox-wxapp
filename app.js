@@ -2,8 +2,8 @@
 var AV = require('utils/av-weapp-min.js');
 var hotapp = require('utils/hotapp.js');
 AV.init({
-  appId: 'gP7vju3g5dXbQyHXbLlKX4v5-gzGzoHsz',
-  appKey: 'qgOtTnc2CD53LtFDiY2SL4JC',
+  appId: 'CdXyR3zm7KJnLxzPmzru6U7O-gzGzoHsz',
+  appKey: 't177D1eLd02itSSpIq7OCgWx',
 });
 App({
   onLaunch: function () {

@@ -55,7 +55,7 @@ Page({
     })
 
     hotapp.request({
-      url: 'http://api.diviniti.cn/jmu/library/search/' + keyword + '/page/1/count/20',
+      url: 'http://122.115.62.15:5678/api/v1/books/?client=wx&limit=10&search=' + keyword,
       success: function (res) {
         wx.hideToast()
         app.globalData.searchResult = res.data;
@@ -104,7 +104,7 @@ Page({
   },
   onShareAppMessage: function () {
     return {
-      title: '图书盒子',
+      title: '妙想家亲子阅读',
       path: '/pages/index/index'
     }
   }

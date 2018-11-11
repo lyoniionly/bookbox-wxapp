@@ -11,7 +11,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "图书盒子",
+    "navigationBarTitleText": "妙想家亲子阅读",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
@@ -27,7 +27,7 @@
       },
       {
         "pagePath": "pages/collect/collect",
-        "text": "搜藏",
+        "text": "收藏",
         "iconPath": "images/icon/icon-collect.png",
         "selectedIconPath": "images/icon/icon-collect-cur.png"
       },

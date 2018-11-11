@@ -28,15 +28,15 @@ Page({
       keyword: param.keyword,
     })
     var result = app.globalData.searchResult
-    curBooksList = result.booksList
+    curBooksList = result.results
     // 有搜索结果
-    if (result.status == "success") {
+    if (result.count > 0) {
       // 更新数据
       that.setData({
         status: "success",
-        booksList: result.booksList,
-        pageCurrent: result.pageCurrent,
-        pagesTotal: result.pagesTotal
+        booksList: result.results,
+        pageCurrent: 0,
+        pagesTotal: Math.floor(result.count / 10)
       })
     } else {
       // 无搜索结果
@@ -132,34 +132,37 @@ Page({
 
   // 上拉加载
   dropLoad: function () {
-
     var that = this;
+    console.log('this.data.pageCurrent', this.data.pageCurrent);
+    console.log('this.data.pagesTotal', this.data.pagesTotal);
     if (this.data.pageCurrent < this.data.pagesTotal) {
       //锁定上拉加载
       that.setData({
         dropLoadFunc: null
       })
       that.loadMore();
-
     }
   },
 
   //加载更多
   loadMore: function () {
-
     var that = this;
     var page = parseInt(that.data.pageCurrent) + 1;
-
     hotapp.request({
-      url: 'http://api.diviniti.cn/jmu/library/search/' + that.data.keyword + '/page/' + page + '/count/20',
+      url: 'http://122.115.62.15:5678/api/v1/books/',
+      data: {
+        client: 'wx',
+        limit: 10,
+        offset: page * 10,
+        search: that.data.keyword
+      },
       success: function (res) {
-        
-        if (res.data.status == "success") {
+        if (res.data.count > 0 && res.data.results.length > 0) {
           // 更新数据
-          curBooksList = curBooksList.concat(res.data.booksList)
+          curBooksList = curBooksList.concat(res.data.results)
           that.setData({
             booksList: curBooksList,
-            pageCurrent: res.data.pageCurrent
+            pageCurrent: parseInt(that.data.pageCurrent) + 1
           })
         } else {
           // 无搜索结果
@@ -198,7 +201,7 @@ Page({
   // 分享搜索结果
    onShareAppMessage: function () {
     return {
-      title: '图书盒子',
+      title: '妙想家亲子阅读馆',
       path: '/pages/index/index'
     }
   }

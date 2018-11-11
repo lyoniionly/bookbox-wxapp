@@ -35,18 +35,21 @@ Page({
     //获取图书信息
     hotapp.request({
       useProxy: true,
-      url: 'http://api.diviniti.cn/jmu/library/book/' + that.data.bookid,
+      url: 'http://122.115.62.15:5678/api/v1/books/' + that.data.bookid,
       success: function (res) {
-        if (res.data.status == "success") {
+        if (res.data.id == that.data.bookid) {
           that.setData({
             name: res.data.name,
-            author: res.data.author,
-            intro: res.data.intro,
-            ISBN: res.data.ISBN,
-            infoes: res.data.infoes
+            author: res.data.authors,
+            intro: res.data.content_brief,
+            ISBN: res.data.isbn,
+            infoes: []//res.data.infoes
           })
-          hotapp.request({
-            url: 'https://api.douban.com/v2/book/isbn/' + res.data.ISBN,
+          wx.request({
+            url: 'https://douban.uieee.com/v2/book/isbn/' + res.data.isbn,
+            header: {
+              'content-type': 'json'
+            },
             success: function (res) {
               var bookDefault = "https://img3.doubanio.com/f/shire/5522dd1f5b742d1e1394a17f44d590646b63871d/pics/book-default-large.gif";
               var bookImg = res.data.images.large;
