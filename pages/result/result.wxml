@@ -18,7 +18,7 @@
     <block wx:if="{{status=='success'}}">
       <navigator wx:for="{{booksList}}" url="../detail/detail?bookid={{booksList[index].id}}&publisher={{booksList[index].press}}&total={{booksList[index].quantity}}&available={{booksList[index].stock}}">
         <view class="bookitem">
-          <view class="name">{{index}}{{item.name}}</view>
+          <view class="name">{{item.name}}</view>
           <view class="author"> {{item.authors}}</view>
           <view class="other-infos">
             <view class="info-item overflow">出版社：{{item.press}}</view>

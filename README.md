@@ -1,7 +1,7 @@
 # bookbox-wxapp
-图书盒子Pro[小程序]--集美大学图书馆的便捷工具
+妙想家亲子阅读馆Pro[小程序]--集美大学图书馆的便捷工具
 
-功能介绍及详情可查看:[图书盒子Pro小程序官网](http://bookbox.toadw.cn)
+功能介绍及详情可查看:[妙想家亲子阅读馆Pro小程序官网](http://bookbox.toadw.cn)
 
 
 小程序截图：[截图](https://github.com/ToadWoo/bookbox-wxapp/wiki/%E7%95%8C%E9%9D%A2%E6%88%AA%E5%9B%BE)

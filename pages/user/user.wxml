@@ -50,7 +50,7 @@
         </view>
       </view>
       <block wx:else>
-        <navigator wx:for="{{booksList}}" url="../detail/detail?bookid={{booksList[index].bookid}}&publisher=图书盒子&total=未知&available=未知">
+        <navigator wx:for="{{booksList}}" url="../detail/detail?bookid={{booksList[index].bookid}}&publisher=妙想家亲子阅读馆&total=未知&available=未知">
           <view class="bookitem">
             <view class="name">{{item.name}}</view>
             <view class="author">作者: {{item.author}}</view>
@@ -74,7 +74,7 @@
         </view>
       </view>
       <block wx:else>
-        <navigator wx:for="{{warnList}}" url="../detail/detail?bookid={{booksList[index].bookid}}&publisher=图书盒子&total=未知&available=未知">
+        <navigator wx:for="{{warnList}}" url="../detail/detail?bookid={{booksList[index].bookid}}&publisher=妙想家亲子阅读馆&total=未知&available=未知">
           <view class="bookitem">
             <view class="name">{{item.name}}</view>
             <view class="author">作者: {{item.author}}</view>

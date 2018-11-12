@@ -215,7 +215,7 @@ Page({
   },
    onShareAppMessage: function () {
     return {
-      title: '图书盒子',
+      title: '妙想家亲子阅读馆',
       path: '/pages/index/index'
     }
   }

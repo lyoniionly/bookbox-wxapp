@@ -43,6 +43,8 @@ Page({
             author: res.data.authors,
             intro: res.data.content_brief,
             ISBN: res.data.isbn,
+            location: res.data.shelf_info || '暂无',
+            publishedDate: res.data.published_date,
             infoes: []//res.data.infoes
           })
           wx.request({
@@ -51,12 +53,20 @@ Page({
               'content-type': 'json'
             },
             success: function (res) {
+              console.log('redss', res);
+              console.log('redss', res.statusCode);
+              
               var bookDefault = "https://img3.doubanio.com/f/shire/5522dd1f5b742d1e1394a17f44d590646b63871d/pics/book-default-large.gif";
-              var bookImg = res.data.images.large;
-              if (bookImg != bookDefault) {
-                that.setData({
-                  image: res.data.images.large
-                })
+              that.setData({
+                image: bookDefault
+              });
+              if (res.statusCode == 200) {
+                var bookImg = res.data.images.large;
+                if (bookImg != bookDefault) {
+                  that.setData({
+                    image: res.data.images.large
+                  })
+                }
               }
             },
             complete: function () {
