@@ -1,9 +1,9 @@
 
 .logo{
   display: block;
-  width: 129rpx;
-  height: 129rpx;
-  margin:  100rpx auto;
+  width: 200rpx;
+  height: 200rpx;
+  margin:  60rpx auto;
 }
 .m-search{
   position: relative;

@@ -1,5 +1,5 @@
 
-<image class="logo" mode="aspectFit" src="../../images/bookbox.png"></image>
+<image class="logo" mode="aspectFit" src="../../images/bookbox.jpg"></image>
 <form bindsubmit="formSubmit">
   <view class="m-search">
     <icon class="icon-search" type="search" size="18" />

@@ -35,8 +35,8 @@ Page({
       that.setData({
         status: "success",
         booksList: result.results,
-        pageCurrent: 0,
-        pagesTotal: Math.floor(result.count / 10)
+        pageCurrent: 1,
+        pagesTotal: Math.ceil(result.count / 10)
       })
     } else {
       // 无搜索结果
@@ -102,19 +102,19 @@ Page({
     })
 
     hotapp.request({
-      url: 'http://api.diviniti.cn/jmu/library/search/' + keyword + '/page/1/count/20',
+      url: 'http://122.115.62.15:5678/api/v1/books/?client=wx&limit=10&search=' + keyword,
       success: function (res) {
         // 请求成功隐藏加载中的提示
         wx.hideToast()
 
-        if (res.data.status == "success") {
-          curBooksList = res.data.booksList;
+        if (res.data.count > 0) {
+          curBooksList = res.data.results;
           
           that.setData({
             status: "success",
-            booksList: res.data.booksList,
-            pageCurrent: res.data.pageCurrent,
-            pagesTotal: res.data.pagesTotal,
+            booksList: res.data.results,
+            pageCurrent: 1,
+            pagesTotal: Math.ceil(res.data.count / 10), 
             scrollTop: "0"
           })
         } else {
@@ -153,7 +153,7 @@ Page({
       data: {
         client: 'wx',
         limit: 10,
-        offset: page * 10,
+        offset: (page-1) * 10,
         search: that.data.keyword
       },
       success: function (res) {
@@ -162,7 +162,7 @@ Page({
           curBooksList = curBooksList.concat(res.data.results)
           that.setData({
             booksList: curBooksList,
-            pageCurrent: parseInt(that.data.pageCurrent) + 1
+            pageCurrent: page
           })
         } else {
           // 无搜索结果
