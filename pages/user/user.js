@@ -10,7 +10,7 @@ Page({
     current: 0
   },
 
-  //除次加载
+  //初次加载
   onLoad: function () {
     var that = this;
     const user = AV.User.current();

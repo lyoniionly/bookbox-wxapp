@@ -20,7 +20,7 @@ Page({
         if (!user || !pwd) {
             wx.showModal({
                 title: '提示',
-                content: '学号及密码不能为空哦！',
+                content: '手机号及密码不能为空哦！',
                 showCancel: false,
                 confirmColor: '#338FFC',
                 success: function (res) {
@@ -38,12 +38,14 @@ Page({
         })
 
         hotapp.request({
-            url: 'http://api.diviniti.cn/jmu/library/login',
+            url: 'http://122.115.62.15:5678/api-auth/login/',
+            method: 'post',
             data: {
-                user: user,
-                pwd: pwd
+              username: user,
+              password: pwd
             },
             success: function (res) {
+              console.log('dfdf', res);
                 var cookie = res.data.cookie;
                 var studentUser = {
                     cookie: cookie,
@@ -88,7 +90,7 @@ Page({
 
                 } else {
                     wx.showToast({
-                        title: '用户名或密码输入有误',
+                        title: '手机号或密码输入有误',
                         icon: 'success',
                         duration: 2000
                     })

@@ -15,6 +15,7 @@ App({
     else {
       //currentUser 为空时，微信一键登录…
       AV.User.loginWithWeapp().then(user => {
+        console.log('res', 1);
         wx.getUserInfo({
           success: ({userInfo}) => {
             // 更新当前用户的信息
@@ -29,7 +30,7 @@ App({
             }).catch(console.error);
           },
           fail:()=>{
-             wx.setStorage({
+            wx.setStorage({
               key: "tshz_avatarUrl",
               data: "../../images/avatar-default.png"
             })
