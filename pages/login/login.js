@@ -37,24 +37,22 @@ Page({
             load: true
         })
 
-        hotapp.request({
-            url: 'http://122.115.62.15:5678/api-auth/login/',
+      hotapp.request({
+          url: 'http://122.115.62.15:5678/rest-auth/login/',
             method: 'post',
             data: {
               username: user,
               password: pwd
             },
             success: function (res) {
-              console.log('dfdf', res);
-                var cookie = res.data.cookie;
+              var cookie = res.data.token;
                 var studentUser = {
-                    cookie: cookie,
+                  cookie: cookie,
                     user: user,
                     pwd: pwd
                 }
                 //成功后储存cookie
-                if (res.data.status == "success") {
-
+              if (res.statusCode == 200) {
                     wx.setStorage({
                         key: "tshz_isbind",
                         data: true
@@ -63,13 +61,20 @@ Page({
                         key: "tshz_cookie",
                         data: cookie
                     })
-                    hotapp.request({
-                        url: 'http://api.diviniti.cn/jmu/library/user/info',
-                        data: { cookie: cookie },
+                    
+                hotapp.request({
+                      url: 'http://122.115.62.15:5678/api/v1/users/' + res.data.user.pk +'/',
+                        data: {
+                          search: user
+                        },
+                      header: {
+                        "Authorization": 'JWT ' + cookie
+                      },
                         method: 'GET',
                         success: function (res) {
                             // success
-                            studentUser.infoes = res.data.infoes;
+                          studentUser.infoes = res.data.customer;
+                          studentUser.infoes['name'] = res.data.first_name
                             const currentUser = AV.User.current();
                             currentUser.set(studentUser).save();
 

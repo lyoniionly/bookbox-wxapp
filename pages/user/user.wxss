@@ -12,6 +12,7 @@ page{
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
+  overflow:hidden;
   box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.3);
   margin: 30rpx 30rpx 0 30rpx;
 }
@@ -35,15 +36,16 @@ page{
 .header .user-infos .username{
   padding-top: 10rpx;
 }
-.header .user-infos .remark{
+.header .user-infos .remark,
+.header .user-infos .phone{
   font-size: 22rpx;
   padding-top: 8rpx;
 }
 .header .logout-btn {
   border: 1rpx solid #fff;
   color: #fff;
-  width: 96rpx;
-  height: 50rpx;
+  width: 116rpx;
+  height: 60rpx;
   padding: 0 20rpx;
   line-height: 50rpx;
   margin: 60rpx 0 0 60rpx;

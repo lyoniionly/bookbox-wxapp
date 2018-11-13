@@ -95,7 +95,6 @@ Page({
   },
   //清除输入框
   clearInput: function () {
-    console.log(1)
     this.setData({
       inputValue: null,
       cancel: false,

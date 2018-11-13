@@ -31,7 +31,6 @@ Page({
 
     //获取收藏状态
     that.isCollect(param.bookid)
-
     //获取图书信息
     hotapp.request({
       useProxy: true,
@@ -43,7 +42,7 @@ Page({
             author: res.data.authors,
             intro: res.data.content_brief,
             ISBN: res.data.isbn,
-            location: res.data.shelf_info || '暂无',
+            location: res.data.shelf_info || '暂无位置',
             publishedDate: res.data.published_date,
             infoes: []//res.data.infoes
           })
@@ -53,8 +52,6 @@ Page({
               'content-type': 'json'
             },
             success: function (res) {
-              console.log('redss', res);
-              console.log('redss', res.statusCode);
               
               var bookDefault = "https://img3.doubanio.com/f/shire/5522dd1f5b742d1e1394a17f44d590646b63871d/pics/book-default-large.gif";
               that.setData({
@@ -143,13 +140,14 @@ Page({
 
     var currentUser = AV.User.current();
     var collection = new Collection();
-
+    console.log('data', that.data);
     var item = {
       'bookid': that.data.bookid,
       'name': that.data.name,
       'author': that.data.author,
-      'location': that.data.infoes[0].location,
-      'callNumber': that.data.infoes[0].callNumber,
+      'location': that.data.location,
+      // 'callNumber': that.data.infoes[0].callNumber,
+      'ISBN': that.data.ISBN,
       'publisher': that.data.publisher,
       'total': that.data.total,
       'available': that.data.available,

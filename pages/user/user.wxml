@@ -1,16 +1,19 @@
 <view class="header">
   <view wx:if="{{isbind}}" class="avatar-cot ">
-    <image class="avatar" src="{{avatarUrl}}"></image>
+    <!-- <image class="avatar" src="{{avatarUrl}}"></image> -->
+    <open-data type="userAvatarUrl"></open-data>
   </view>
   <view wx:else class="avatar-cot unlogin-avatar">
-    <image class="avatar" src="{{avatarUrl}}"></image>
+    <!-- <image class="avatar" src="{{avatarUrl}}"></image> -->
+    <open-data type="userAvatarUrl"></open-data>
   </view>
   <block wx:if="{{isbind}}">
     <view class="user-infos">
-      <view class="username">{{studentInfoes.infoes.userName}}</view>
-      <view class="remark">{{studentInfoes.infoes.userRemarks}}</view>
+      <view class="username">{{studentInfoes.name}}</view>
+      <view class="phone">{{studentInfoes.username}}</view>
+      <view class="remark"></view>
     </view>
-    <button class="logout-btn" type="default" size="mini" plain="true" hover-class="none" bindtap="unBind"> 解绑 </button>
+    <button class="logout-btn" size="mini" plain="true" hover-class="none" bindtap="unBind"> 解绑 </button>
   </block>
 </view>
 <block wx:if="{{isbind}}">
@@ -50,13 +53,13 @@
         </view>
       </view>
       <block wx:else>
-        <navigator wx:for="{{booksList}}" url="../detail/detail?bookid={{booksList[index].bookid}}&publisher=妙想家亲子阅读馆&total=未知&available=未知">
+        <navigator wx:for="{{booksList}}" url="../detail/detail?bookid={{booksList[index].id}}&publisher={{booksList[index].press}}&total={{booksList[index].quantity}}&available={{booksList[index].stock}}">
           <view class="bookitem">
             <view class="name">{{item.name}}</view>
             <view class="author">作者: {{item.author}}</view>
             <view class="other-infos">
-              <view class="info-item overflow">借书时间:{{item.borrowedDate.rawValue}}</view>
-              <view class="info-item">应还时间:{{item.expireDate.rawValue}}</view>
+              <view class="info-item overflow">借书时间:{{item.borrowedDate}}</view>
+              <view class="info-item">应还时间:{{item.expireDate}}</view>
               <view wx:if="{{item.renewable}}" class="info-item">可续借</view>
               <view wx:else class="info-item">不可续借</view>
             </view>
@@ -74,13 +77,13 @@
         </view>
       </view>
       <block wx:else>
-        <navigator wx:for="{{warnList}}" url="../detail/detail?bookid={{booksList[index].bookid}}&publisher=妙想家亲子阅读馆&total=未知&available=未知">
+        <navigator wx:for="{{warnList}}" url="../detail/detail?bookid={{booksList[index].id}}&publisher={{booksList[index].press}}&total={{booksList[index].quantity}}&available={{booksList[index].stock}}">
           <view class="bookitem">
             <view class="name">{{item.name}}</view>
             <view class="author">作者: {{item.author}}</view>
             <view class="other-infos">
               <view class="info-item">还书地点:{{item.location}}</view>
-              <view class="info-item">应还时间:{{item.expiredDate.rawValue}}</view>
+              <view class="info-item">应还时间:{{item.expiredDate}}</view>
             </view>
           </view>
         </navigator>

@@ -133,8 +133,6 @@ Page({
   // 上拉加载
   dropLoad: function () {
     var that = this;
-    console.log('this.data.pageCurrent', this.data.pageCurrent);
-    console.log('this.data.pagesTotal', this.data.pagesTotal);
     if (this.data.pageCurrent < this.data.pagesTotal) {
       //锁定上拉加载
       that.setData({

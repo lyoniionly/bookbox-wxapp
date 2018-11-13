@@ -1,5 +1,5 @@
 <view>
-  <image class="logo" src="../../images/bookbox.png"></image>
+  <image class="logo" src="../../images/bookbox.jpg"></image>
   <image mode="aspectFit" class="title" src="../../images/title.png"></image>
   <form bindsubmit="formSubmit">
     <view class="m-login">

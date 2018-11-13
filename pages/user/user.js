@@ -50,6 +50,7 @@ Page({
   //每一次界面显示
   onShow: function () {
     var that = this;
+    var studentInfoes = wx.getStorageSync('tshz_studentInfoes');
     that.setData({
       avatarUrl: wx.getStorageSync('tshz_avatarUrl'),
       studentInfoes: wx.getStorageSync('tshz_studentInfoes')
@@ -62,19 +63,21 @@ Page({
         })
         if (res.data) {
           var cookie = wx.getStorageSync('tshz_cookie')
-          that.getBorrowData(cookie)
-          that.getExpiredData(cookie)
+          that.getBorrowData(studentInfoes.customer.pk, cookie)
+          //that.getExpiredData(cookie)
         }
       }
     })
   },
 
   //获取借书信息
-  getBorrowData: function (cookie) {
+  getBorrowData: function (customerId, cookie) {
     var that = this;
     hotapp.request({
-      url: 'http://api.diviniti.cn/jmu/library/borrowed',
-      data: { cookie: cookie },
+      url: 'http://122.115.62.15:5678/api/v1/customers/' + customerId +'/borrowed/',
+      header: {
+        "Authorization": 'JWT ' + cookie
+      },
       method: 'GET',
       success: function (res) {
         // success
@@ -84,9 +87,11 @@ Page({
           var booksList= res.data.booksList;
 
           for(var i=0;i<booksTotal;i++){
-              var expireDate = booksList[i].expireDate.rawValue
-              var borrowedDate = booksList[i].borrowedDate.rawValue
-              booksList[i].tip =that.dateDiff(expireDate,borrowedDate)
+            var expireDate = new Date(booksList[i].expireDate);
+            var borrowedDate = new Date(booksList[i].borrowedDate);
+            booksList[i].tip =that.dateDiff(expireDate,borrowedDate)
+            booksList[i].expireDate = expireDate.getFullYear() + '-' + (expireDate.getMonth() + 1) + '-' + expireDate.getDate();
+            booksList[i].borrowedDate = borrowedDate.getFullYear() + '-' + (borrowedDate.getMonth() + 1) + '-' + borrowedDate.getDate();
           }
 
           that.setData({
@@ -197,15 +202,11 @@ Page({
 
   //计算天数差
   dateDiff: function (expireDate, borrowDate) {
-    var aDate, oDate1, oDate2, iDays,tip
-    aDate = expireDate.split("-")
-    oDate1 = new Date(aDate[1] + '/' + aDate[2] + '/' + aDate[0])
-    aDate = borrowDate.split("-")
-    oDate2 = new Date(aDate[1] + '/' + aDate[2] + '/' + aDate[0])
-    iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24)
+    var iDays,tip;
+    iDays = parseInt(Math.abs(expireDate - borrowDate) / 1000 / 60 / 60 / 24);
     var now = new Date()
   
-    var isExpire = parseInt((oDate1-now) / 1000 / 60 / 60 / 24)
+    var isExpire = parseInt((expireDate-now) / 1000 / 60 / 60 / 24)
 
     if (isExpire<0){
       return isExpire

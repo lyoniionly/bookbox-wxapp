@@ -15,7 +15,6 @@ App({
     else {
       //currentUser 为空时，微信一键登录…
       AV.User.loginWithWeapp().then(user => {
-        console.log('res', 1);
         wx.getUserInfo({
           success: ({userInfo}) => {
             // 更新当前用户的信息
